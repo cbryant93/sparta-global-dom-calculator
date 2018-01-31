@@ -18,6 +18,10 @@ for (i = 0; i < buttons.length; i++) {
      //store number
     //replace display with number
 
+    buttons[i].addEventListener('click', function(){
+      console.log(event.target.innerHTML);
+    } )
+
 
 }
 
