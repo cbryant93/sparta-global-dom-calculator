@@ -11,6 +11,11 @@ var int1;
 var int2;
 var operator = '';
 var number = '';
+var next = false;
+
+function displayText(screen){
+  display.innerHTML = screen;
+}
 
 
 function addToDisplay(number, nString){
@@ -28,7 +33,7 @@ for (var i = 0; i < nButtons.length; i++) {
 
       number = addToDisplay(number, event.target.innerHTML) ;
 
-     savedNumber(number);
+
 
     });
 };
@@ -38,9 +43,10 @@ for (var i = 0; i < nButtons.length; i++) {
 for ( var j = 0; j < operators.length; j++) {
 var oButton = operators[j];
 oButton.addEventListener('click', function(event){
-
+   savedNumber(number);
+   number = '';
   operator = addToDisplay(operator, event.target.innerHTML) ;
-  number = '';
+  next = true;
 
 
     });
@@ -49,11 +55,11 @@ oButton.addEventListener('click', function(event){
 
 function savedNumber(number){
   parsedNumber = parseFloat(number);
-  if(!int1){
-    return int1 = parsedNumber;
+  if(!next){
+    int1 = parsedNumber;
 
   }else{
-    return int2 = parsedNumber;
+    int2 = parsedNumber;
   }
 }
 
@@ -81,9 +87,21 @@ function calculate(num1, num2, operator){
 }
 
 sumButton.addEventListener('click', function(event){
+  savedNumber(number);
   var answer = calculate(int1, int2, operator)
   console.log(answer);
-   answer = display.innerHTML;
+   display.innerHTML = answer;
+
+
+})
+
+clear.addEventListener('click', function(){
+  num1 = 0;
+  num2 = 0;
+  next = false;
+  operator = '';
+  number = '';
+  display.innerHTML = 0;
 
 
 })
